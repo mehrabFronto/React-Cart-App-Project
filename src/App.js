@@ -9,7 +9,12 @@ const App = () => {
          <Layout>
             <Switch>
                {routes.map((route) => {
-                  return <Route {...route} />;
+                  return (
+                     <Route
+                        key={route.path}
+                        {...route}
+                     />
+                  );
                })}
             </Switch>
          </Layout>
