@@ -1,7 +1,10 @@
 import * as data from "../../data";
+import { useCartActions } from "../../Providers/CartProvider";
 
 const HomePage = () => {
    const products = data.products;
+
+   const dispatch = useCartActions();
 
    return (
       <main>
@@ -28,7 +31,9 @@ const HomePage = () => {
                      {/* add to cart btn */}
                      <div className="btnContainer">
                         <button
-                           onClick={() => console.log(p)}
+                           onClick={() =>
+                              dispatch({ type: "ADD_TO_CART", payload: p })
+                           }
                            className="btn">
                            Add to cart
                         </button>
