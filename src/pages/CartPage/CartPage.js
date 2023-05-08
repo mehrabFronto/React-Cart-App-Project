@@ -1,8 +1,17 @@
-import { useCart } from "../../Providers/CartProvider";
+import { useCart, useCartActions } from "../../Providers/CartProvider";
 import styles from "./CartPage.module.css";
 
 const CartPage = () => {
    const { cart } = useCart();
+   const dispatch = useCartActions();
+
+   const decHandler = (item) => {
+      dispatch({ type: "DECREMENT_PRODUCT", payload: item });
+   };
+
+   const incHandler = (item) => {
+      dispatch({ type: "ADD_TO_CART", payload: item });
+   };
 
    const renderCart = () => {
       if (cart.length === 0) {
@@ -31,9 +40,15 @@ const CartPage = () => {
                            <div className={styles.cartItemDetail}>
                               <h2>Name : {item.name}</h2>
                               <div className={styles.cartItemQty}>
-                                 <button> - </button>
+                                 <button onClick={() => decHandler(item)}>
+                                    {" "}
+                                    -{" "}
+                                 </button>
                                  <span>{item.qty}</span>
-                                 <button> + </button>
+                                 <button onClick={() => incHandler(item)}>
+                                    {" "}
+                                    +{" "}
+                                 </button>
                               </div>
                            </div>
                            <div className={styles.cartItemDetail}>
