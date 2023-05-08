@@ -1,8 +1,9 @@
 import { useCart, useCartActions } from "../../Providers/CartProvider";
 import styles from "./CartPage.module.css";
+import { BiTrash } from "react-icons/bi";
 
 const CartPage = () => {
-   const { cart } = useCart();
+   const { cart, total } = useCart();
    const dispatch = useCartActions();
 
    const decHandler = (item) => {
@@ -41,8 +42,11 @@ const CartPage = () => {
                               <h2>Name : {item.name}</h2>
                               <div className={styles.cartItemQty}>
                                  <button onClick={() => decHandler(item)}>
-                                    {" "}
-                                    -{" "}
+                                    {item.qty === 1 ? (
+                                       <BiTrash style={{ color: "red" }} />
+                                    ) : (
+                                       "-"
+                                    )}
                                  </button>
                                  <span>{item.qty}</span>
                                  <button onClick={() => incHandler(item)}>
@@ -62,7 +66,12 @@ const CartPage = () => {
             </div>
 
             {/* cart sumary */}
-            <div className={styles.cartSumary}>sumary</div>
+            <div className={styles.cartSumary}>
+               <h2>
+                  Total cost : <span>${total}</span>
+               </h2>
+               <button className="btn btn-cart">Checkout</button>
+            </div>
          </div>
       );
    };

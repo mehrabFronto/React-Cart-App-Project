@@ -83,3 +83,9 @@
     font-size: 1.6rem;
     font-weight : 500;
 }
+
+.btn-cart{
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    color: var(--secondary-color);
+}
