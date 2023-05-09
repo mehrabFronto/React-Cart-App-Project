@@ -7,7 +7,7 @@ const CartPage = () => {
    const dispatch = useCartActions();
 
    const decHandler = (item) => {
-      dispatch({ type: "DECREMENT_PRODUCT", payload: item });
+      dispatch({ type: "REMOVE_PRODUCT", payload: item });
    };
 
    const incHandler = (item) => {

@@ -21,7 +21,7 @@ const cartReducer = (state, action) => {
          };
       }
 
-      case "DECREMENT_PRODUCT": {
+      case "REMOVE_PRODUCT": {
          const updatedCart = [...state.cart];
 
          const index = updatedCart.findIndex((p) => p.id === action.payload.id);
