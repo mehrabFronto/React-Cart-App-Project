@@ -44,6 +44,12 @@
     justify-content: space-between;
 }
 
+.priceSection{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .cartItemQty{
     display: flex;
     align-items: center;

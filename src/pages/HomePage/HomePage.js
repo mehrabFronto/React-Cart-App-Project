@@ -22,7 +22,7 @@ const HomePage = () => {
                      key={p.id}
                      className="product">
                      {/* product image */}
-                     <div>
+                     <div className="productImageContainer">
                         <img
                            src={p.image}
                            alt={p.name}
@@ -32,7 +32,13 @@ const HomePage = () => {
                      {/* product detail */}
                      <div className="productDetail">
                         <h2>{p.name}</h2>
-                        <p>${p.price}</p>
+                        <p className={p.price !== p.offPrice && "offPrice"}>
+                           ${p.price}
+                        </p>
+                     </div>
+                     {/* off price */}
+                     <div className="offPriceSection">
+                        {p.price !== p.offPrice && <p>${p.offPrice}</p>}
                      </div>
                      {/* add to cart btn */}
                      <div className="btnContainer">

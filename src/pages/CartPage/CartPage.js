@@ -56,8 +56,20 @@ const CartPage = () => {
                               </div>
                            </div>
                            <div className={styles.cartItemDetail}>
-                              <p>Price : ${item.price}</p>
-                              <p>Total : ${item.price * item.qty}</p>
+                              <div className={styles.priceSection}>
+                                 <p>Price :</p>
+                                 <p
+                                    className={
+                                       item.price !== item.offPrice &&
+                                       "offPrice"
+                                    }>
+                                    ${item.price}
+                                 </p>
+                                 {item.price !== item.offPrice && (
+                                    <p>${item.offPrice}</p>
+                                 )}
+                              </div>
+                              <p>Total : ${item.offPrice * item.qty}</p>
                            </div>
                         </section>
                      </div>
