@@ -3,10 +3,13 @@ import Layout from "./Layout/Layout";
 import { Route, Switch } from "react-router-dom";
 import { routes } from "./routes";
 import CartProvider from "./Providers/CartProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
    return (
       <div className="app">
+         <ToastContainer style={{ fontSize: "16px" }} />
          <CartProvider>
             <Layout>
                <Switch>

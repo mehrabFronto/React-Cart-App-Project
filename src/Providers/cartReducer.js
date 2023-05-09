@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const cartReducer = (state, action) => {
    switch (action.type) {
       case "ADD_TO_CART": {
@@ -9,6 +11,7 @@ const cartReducer = (state, action) => {
 
          if (index < 0) {
             updatedCart.push({ ...action.payload, qty: 1 });
+            toast.success("product added to the cart");
          } else {
             const updatedItem = { ...updatedCart[index] };
             updatedItem.qty++;
@@ -29,6 +32,7 @@ const cartReducer = (state, action) => {
          const updatedItem = { ...updatedCart[index] };
 
          if (updatedItem.qty === 1) {
+            toast.success("product removed from the cart");
             const filteredCart = updatedCart.filter(
                (c) => c.id !== action.payload.id,
             );

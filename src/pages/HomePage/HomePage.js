@@ -1,10 +1,16 @@
+import { Link } from "react-router-dom";
 import * as data from "../../data";
-import { useCartActions } from "../../Providers/CartProvider";
+import { useCart, useCartActions } from "../../Providers/CartProvider";
 
 const HomePage = () => {
    const products = data.products;
 
+   const { cart } = useCart();
    const dispatch = useCartActions();
+
+   const checkInCart = (cart, product) => {
+      return cart.find((item) => item.id === product.id);
+   };
 
    return (
       <main>
@@ -34,8 +40,19 @@ const HomePage = () => {
                            onClick={() =>
                               dispatch({ type: "ADD_TO_CART", payload: p })
                            }
-                           className="btn">
-                           Add to cart
+                           className={
+                              checkInCart(cart, p) ? "btn btn-continue" : "btn"
+                           }
+                           disabled={checkInCart(cart, p) && true}>
+                           {checkInCart(cart, p) ? (
+                              <Link
+                                 to="/cart"
+                                 className="continueLink">
+                                 Continue Purchase?
+                              </Link>
+                           ) : (
+                              "Add to cart"
+                           )}
                         </button>
                      </div>
                   </div>

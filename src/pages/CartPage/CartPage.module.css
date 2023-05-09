@@ -78,15 +78,9 @@
     }
 
     .cartItem{
-        /* border-radius: 0; */
         flex-direction: row;
         gap: 10px;
-        /* border-bottom: 1px solid var(--primary-color); */
         padding: 1rem;   
-    }
-
-    .cartItem:last-child{
-        border-bottom: none;
     }
 
     .cartItem img{

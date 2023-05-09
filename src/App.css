@@ -83,8 +83,23 @@
     font-weight : 500;
 }
 
+
 .btn-cart{
     background-color: var(--primary-color);
     border-radius: 6px;
     color: var(--secondary-color);
+}
+
+.btn-continue{
+    padding: 0;
+}
+
+.continueLink{
+    display: block;
+    padding: 1rem 0;
+    width: 100%;
+    color: var(--primary-color);
+}
+.continueLink:visited{
+    color: var(--primary-color);
 }
