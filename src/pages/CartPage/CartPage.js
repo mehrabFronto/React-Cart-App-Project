@@ -3,7 +3,7 @@ import styles from "./CartPage.module.css";
 import { BiTrash } from "react-icons/bi";
 
 const CartPage = () => {
-   const { cart, total } = useCart();
+   const { cart } = useCart();
    const dispatch = useCartActions();
 
    const decHandler = (item) => {
@@ -22,7 +22,7 @@ const CartPage = () => {
       return (
          <div className={styles.cart}>
             {/* cart items */}
-            <div className={styles.cartItemsList}>
+            <section className={styles.cartItemsList}>
                {cart.map((item) => {
                   return (
                      // cart item
@@ -75,15 +75,10 @@ const CartPage = () => {
                      </div>
                   );
                })}
-            </div>
+            </section>
 
-            {/* cart sumary */}
-            <div className={styles.cartSumary}>
-               <h2>
-                  Total cost : <span>${total}</span>
-               </h2>
-               <button className="btn btn-cart">Checkout</button>
-            </div>
+            {/* cart summery */}
+            <CartSummery />
          </div>
       );
    };
@@ -92,3 +87,33 @@ const CartPage = () => {
 };
 
 export default CartPage;
+
+const CartSummery = () => {
+   const { cart, total } = useCart();
+
+   const subtotal = cart.reduce(
+      (acc, curr) => (acc += curr.price * curr.qty),
+      0,
+   );
+
+   return (
+      <section className={styles.cartSummery}>
+         <h2>Cart Summery</h2>
+         <div className={styles.summeryItem}>
+            <p>Subtotal :</p>
+            <p>${subtotal}</p>
+         </div>
+         <div
+            className={styles.summeryItem}
+            style={{ borderBottom: "1px solid #666", paddingBottom: "20px" }}>
+            <p>Discount :</p>
+            <p>${subtotal - total}</p>
+         </div>
+         <div className={`${styles.summeryItem} ${styles.cost}`}>
+            <p>Total :</p>
+            <p>${total}</p>
+         </div>
+         <button className="btn btn-cart">Checkout</button>
+      </section>
+   );
+};
