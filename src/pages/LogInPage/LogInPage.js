@@ -1,5 +1,7 @@
+import LogInForm from "../../components/LogInForm/LogInForm";
+
 const LogInPage = () => {
-   return <div>LogInPage</div>;
+   return <LogInForm />;
 };
 
 export default LogInPage;
