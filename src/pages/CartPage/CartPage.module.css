@@ -5,21 +5,36 @@
     flex-direction: column; 
     align-items: center;
     gap: 3rem;
-    padding: 0 2rem;
+    padding: 0 1rem;
 }
 
 .cartItemsList{
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    box-shadow: var(--box-shadow-color);
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.cartItemsList::-webkit-scrollbar{
+    width: 5px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+}
+
+.cartItemsList::-webkit-scrollbar-thumb{
+    background-color: var(--primary-color);
+    border-radius: 5px;
 }
 
 .cartItem{
     display: flex;
     flex-direction: column;
     background-color: var(--secondary-color);
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: var(--box-shadow-color);
+    padding: 1rem;
 }
 
 .cartItem img{
@@ -27,7 +42,7 @@
     width: 100%;
     min-height: 220px;
     max-height: 280px;
-    border-radius: 8px;
+    border-radius: 6px;
     margin-bottom: 2rem;
 }
 
@@ -71,7 +86,6 @@
 
 @media screen and (min-width: 768px) {
     .cart{
-       
         align-items: start;
     }
 
@@ -79,14 +93,16 @@
         background-color: var(--secondary-color);
         padding: 2rem;
         border-radius: 10px;
-        width: 750px;
+        width: 720px;
+        height: auto;
+        max-height: 420px;
+        overflow-y: auto;
         box-shadow: var(--box-shadow-color);
     }
 
     .cartItem{
         flex-direction: row;
         gap: 10px;
-        padding: 1rem;   
     }
 
     .cartItem img{
@@ -119,17 +135,19 @@
 
     .cartItemsList{
         width: 650px;
+        height: auto;
+        max-height: 635px;
+        overflow: auto;
     }
 }
 
-@media screen and (min-width: 1280px) {
-    .cart{
-        flex-direction: row;
-        align-items: start;
-    }
+@media screen and (min-width: 1440px) {
 
     .cartItemsList{
         width: 800px;
+        height: auto;
+        max-height: 820px;
+        overflow: auto;
     }
 }
 
@@ -137,13 +155,20 @@
 
 .cartSummery{
     background-color: var(--secondary-color);
-    padding: 1.5rem ;
+    padding: 1rem ;
     border-radius: 8px;
     width: 100%;
+    box-shadow: var(--box-shadow-color);
+    margin-bottom: 2rem;
+}
+
+.cartSummeryWrapper{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 2rem;
     box-shadow: var(--box-shadow-color);
+    border-radius: 8px;
 }
 
 .summeryItem{
@@ -167,9 +192,8 @@
 }
 @media screen and (min-width: 768px) {
     .cartSummery{
-
         width:300px;
-
+        margin-bottom: 0;
     }
     
 }

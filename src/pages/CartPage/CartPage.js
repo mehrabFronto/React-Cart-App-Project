@@ -60,8 +60,9 @@ const CartPage = () => {
                                  <p>Price :</p>
                                  <p
                                     className={
-                                       item.price !== item.offPrice &&
-                                       "offPrice"
+                                       item.price !== item.offPrice
+                                          ? "offPrice"
+                                          : ""
                                     }>
                                     ${item.price}
                                  </p>
@@ -98,22 +99,27 @@ const CartSummery = () => {
 
    return (
       <section className={styles.cartSummery}>
-         <h2>Cart Summery</h2>
-         <div className={styles.summeryItem}>
-            <p>Subtotal :</p>
-            <p>${subtotal}</p>
+         <div className={styles.cartSummeryWrapper}>
+            <h2>Cart Summery</h2>
+            <div className={styles.summeryItem}>
+               <p>Subtotal :</p>
+               <p>${subtotal}</p>
+            </div>
+            <div
+               className={styles.summeryItem}
+               style={{
+                  borderBottom: "1px solid #666",
+                  paddingBottom: "20px",
+               }}>
+               <p>Discount :</p>
+               <p>${subtotal - total}</p>
+            </div>
+            <div className={`${styles.summeryItem} ${styles.cost}`}>
+               <p>Total :</p>
+               <p>${total}</p>
+            </div>
+            <button className="btn btn-cart">Checkout</button>
          </div>
-         <div
-            className={styles.summeryItem}
-            style={{ borderBottom: "1px solid #666", paddingBottom: "20px" }}>
-            <p>Discount :</p>
-            <p>${subtotal - total}</p>
-         </div>
-         <div className={`${styles.summeryItem} ${styles.cost}`}>
-            <p>Total :</p>
-            <p>${total}</p>
-         </div>
-         <button className="btn btn-cart">Checkout</button>
       </section>
    );
 };

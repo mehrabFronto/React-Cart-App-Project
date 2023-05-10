@@ -20,25 +20,28 @@ const HomePage = () => {
                return (
                   <div
                      key={p.id}
-                     className="product">
-                     {/* product image */}
-                     <div className="productImageContainer">
-                        <img
-                           src={p.image}
-                           alt={p.name}
-                           className="productImage"
-                        />
-                     </div>
-                     {/* product detail */}
-                     <div className="productDetail">
-                        <h2>{p.name}</h2>
-                        <p className={p.price !== p.offPrice && "offPrice"}>
-                           ${p.price}
-                        </p>
-                     </div>
-                     {/* off price */}
-                     <div className="offPriceSection">
-                        {p.price !== p.offPrice && <p>${p.offPrice}</p>}
+                     className="productsListWrapper">
+                     {/* product */}
+                     <div className="product">
+                        {/* product image */}
+                        <div className="productImageContainer">
+                           <img
+                              src={p.image}
+                              alt={p.name}
+                              className="productImage"
+                           />
+                        </div>
+                        {/* product detail */}
+                        <div className="productDetail">
+                           <h2>{p.name}</h2>
+                           <p>${p.offPrice}</p>
+                        </div>
+                        {/* off price */}
+                        <div className="offPriceSection">
+                           {p.price !== p.offPrice && (
+                              <p className="offPrice">${p.price}</p>
+                           )}
+                        </div>
                      </div>
                      {/* add to cart btn */}
                      <div className="btnContainer">
@@ -57,7 +60,7 @@ const HomePage = () => {
                                  Continue Purchase?
                               </Link>
                            ) : (
-                              "Add to cart"
+                              "Add To Cart"
                            )}
                         </button>
                      </div>
