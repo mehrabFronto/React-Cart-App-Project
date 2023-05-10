@@ -190,10 +190,32 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.cartSummery button {
+    padding: 0;
+}
+
+.cartSummery button a{
+    display: block;
+    padding: 1rem 0;
+    width: 100%;
+    color: var(--secondary-color);
+}
+
+
+.cartSummery button a:visited{
+    color: var(--secondary-color);
+}
+
 @media screen and (min-width: 768px) {
     .cartSummery{
         width:300px;
         margin-bottom: 0;
     }
-    
+}
+
+@media screen and (min-width: 1440px) {
+    .cartSummery{
+        width:350px;
+    }
 }

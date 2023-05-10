@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useCart, useCartActions } from "../../Providers/CartProvider";
 import styles from "./CartPage.module.css";
 import { BiTrash } from "react-icons/bi";
@@ -118,7 +119,9 @@ const CartSummery = () => {
                <p>Total :</p>
                <p>${total}</p>
             </div>
-            <button className="btn btn-cart">Checkout</button>
+            <button className="btn btn-cart">
+               <Link to="/checkout">Checkout</Link>
+            </button>
          </div>
       </section>
    );
