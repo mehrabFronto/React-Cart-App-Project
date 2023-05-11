@@ -3,14 +3,13 @@ import * as Yup from "yup";
 import Input from "../../common/Input/Input";
 import styles from "../../common/formStyles/form.module.css";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { logInUser } from "../../services/logInService";
+import { toast } from "react-toastify";
 
 const initialValues = {
    email: "",
    password: "",
-};
-
-const onSubmit = (values) => {
-   console.log(values);
 };
 
 const validationSchema = Yup.object({
@@ -20,7 +19,19 @@ const validationSchema = Yup.object({
    password: Yup.string().required("Password is required"),
 });
 
-const LogInForm = () => {
+const LogInForm = ({ history }) => {
+   const onSubmit = async (values, { resetForm }) => {
+      try {
+         await logInUser(values);
+         resetForm();
+         toast.success("Login was successful");
+         history.push("/");
+      } catch (err) {
+         if (err.response && err.response.data.message)
+            toast.error(err.response.data.message);
+      }
+   };
+
    const formik = useFormik({
       initialValues,
       onSubmit,
@@ -76,4 +87,4 @@ const LogInForm = () => {
    );
 };
 
-export default LogInForm;
+export default withRouter(LogInForm);

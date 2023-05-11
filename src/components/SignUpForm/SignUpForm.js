@@ -3,6 +3,9 @@ import * as Yup from "yup";
 import Input from "../../common/Input/Input";
 import styles from "../../common/formStyles/form.module.css";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { signUpUser } from "../../services/signUpService";
+import { toast } from "react-toastify";
 
 const initialValues = {
    name: "",
@@ -10,10 +13,6 @@ const initialValues = {
    phoneNumber: "",
    password: "",
    confirmPassword: "",
-};
-
-const onSubmit = (values) => {
-   console.log(values);
 };
 
 const validationSchema = Yup.object({
@@ -33,7 +32,34 @@ const validationSchema = Yup.object({
       .required("confirm password is required"),
 });
 
-const SignUpForm = () => {
+const SignUpForm = ({ history }) => {
+   const onSubmit = async (values, { resetForm }) => {
+      const { name, email, phoneNumber, password } = values;
+
+      const userData = {
+         name,
+         email,
+         phoneNumber,
+         password,
+      };
+
+      try {
+         await signUpUser(userData);
+         resetForm({
+            name: "",
+            email: "",
+            phoneNumber: "",
+            password: "",
+            confirmPassword: "",
+         });
+         toast.success("Registration was successful");
+         history.push("/");
+      } catch (err) {
+         if (err.response && err.response.data.message)
+            toast.error(err.response.data.message);
+      }
+   };
+
    const formik = useFormik({
       initialValues,
       onSubmit,
@@ -112,4 +138,4 @@ const SignUpForm = () => {
    );
 };
 
-export default SignUpForm;
+export default withRouter(SignUpForm);
