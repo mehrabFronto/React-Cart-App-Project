@@ -1,12 +1,24 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, withRouter } from "react-router-dom";
 import styles from "./Navigation.module.css";
 import { useCart } from "../../Providers/CartProvider";
 import { HiMenuAlt3, HiOutlineX } from "react-icons/hi";
+import { ImExit } from "react-icons/im";
 import { useState } from "react";
+import { useAuth, useAuthAction } from "../../Providers/AuthProvider";
+import { toast } from "react-toastify";
 
-const Navigation = () => {
+const Navigation = ({ location, history }) => {
    const [isOpen, setIsOpen] = useState(false);
    const { cart } = useCart();
+   const userData = useAuth();
+   const setAuth = useAuthAction();
+
+   const logOutHandler = () => {
+      setAuth(false);
+      toast.success("you logged out");
+      if (location.pathname === "/profile" || location.pathname === "/checkout")
+         history.push("/");
+   };
 
    return (
       <header className={styles.header}>
@@ -42,10 +54,10 @@ const Navigation = () => {
                      <li className={styles.mobileTab}>
                         <NavLink
                            className={styles.mobileLink}
-                           to="/sign-up"
+                           to={userData ? "/profile" : "/log-in"}
                            activeClassName={styles.mobileActiveLink}
                            onClick={() => setIsOpen(false)}>
-                           Login/Signup
+                           {userData ? "Profile" : "Login/Signup"}
                         </NavLink>
                      </li>
                   </div>
@@ -64,10 +76,16 @@ const Navigation = () => {
                      <NavLink
                         className={styles.link}
                         activeClassName={styles.activeClassName}
-                        to="/sign-up">
-                        Login/Signup
+                        to={userData ? "/profile" : "/log-in"}>
+                        {userData ? "Profile" : "Login/Signup"}
                      </NavLink>
                   </li>
+                  {userData && (
+                     <ImExit
+                        className="btn btn-menu"
+                        onClick={logOutHandler}
+                     />
+                  )}
                </div>
             </ul>
          </nav>
@@ -75,4 +93,4 @@ const Navigation = () => {
    );
 };
 
-export default Navigation;
+export default withRouter(Navigation);

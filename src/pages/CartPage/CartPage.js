@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useCart, useCartActions } from "../../Providers/CartProvider";
 import styles from "./CartPage.module.css";
 import { BiTrash } from "react-icons/bi";
+import { useAuth } from "../../Providers/AuthProvider";
 
 const CartPage = () => {
    const { cart } = useCart();
@@ -91,6 +92,7 @@ const CartPage = () => {
 export default CartPage;
 
 const CartSummery = () => {
+   const userData = useAuth();
    const { cart, total } = useCart();
 
    const subtotal = cart.reduce(
@@ -120,7 +122,9 @@ const CartSummery = () => {
                <p>${total}</p>
             </div>
             <button className="btn btn-cart">
-               <Link to="/checkout">Checkout</Link>
+               <Link to={userData ? "/checkout" : "/log-in?redirect=checkout"}>
+                  Checkout
+               </Link>
             </button>
          </div>
       </section>

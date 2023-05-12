@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { logInUser } from "../../services/logInService";
 import { toast } from "react-toastify";
+import { useAuthAction } from "../../Providers/AuthProvider";
+import { useQuery } from "../../hooks/useQuery";
 
 const initialValues = {
    email: "",
@@ -20,12 +22,16 @@ const validationSchema = Yup.object({
 });
 
 const LogInForm = ({ history }) => {
-   const onSubmit = async (values, { resetForm }) => {
+   const setAuth = useAuthAction();
+   const query = useQuery();
+   const redirect = query.get("redirect") || "/";
+
+   const onSubmit = async (values) => {
       try {
-         await logInUser(values);
-         resetForm();
+         const { data } = await logInUser(values);
+         setAuth(data);
          toast.success("Login was successful");
-         history.push("/");
+         history.push(redirect);
       } catch (err) {
          if (err.response && err.response.data.message)
             toast.error(err.response.data.message);
@@ -73,7 +79,7 @@ const LogInForm = ({ history }) => {
                      Log In
                   </button>
                   <Link
-                     to="/sign-up"
+                     to={`sign-up?redirect=${redirect}`}
                      style={{
                         fontSize: "16px",
                         color: "var(--primary-color)",
