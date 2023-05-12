@@ -18,7 +18,22 @@ const CartPage = () => {
 
    const renderCart = () => {
       if (cart.length === 0) {
-         return <h2>Cart is empty!</h2>;
+         return (
+            <div
+               style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "2rem",
+               }}>
+               <h2>Cart is empty!</h2>
+               <Link
+                  style={{ color: "var(--primary-color)", fontSize: "2rem" }}
+                  to="/">
+                  Go Shopping
+               </Link>
+            </div>
+         );
       }
 
       return (
@@ -86,12 +101,12 @@ const CartPage = () => {
       );
    };
 
-   return <main>{renderCart()}</main>;
+   return <div>{renderCart()}</div>;
 };
 
 export default CartPage;
 
-const CartSummery = () => {
+export const CartSummery = ({ title = "Cart Summery", btn = "Checkout" }) => {
    const userData = useAuth();
    const { cart, total } = useCart();
 
@@ -103,7 +118,7 @@ const CartSummery = () => {
    return (
       <section className={styles.cartSummery}>
          <div className={styles.cartSummeryWrapper}>
-            <h2>Cart Summery</h2>
+            <h2>{title}</h2>
             <div className={styles.summeryItem}>
                <p>Subtotal :</p>
                <p>${subtotal}</p>
@@ -123,7 +138,7 @@ const CartSummery = () => {
             </div>
             <button className="btn btn-cart">
                <Link to={userData ? "/checkout" : "/log-in?redirect=checkout"}>
-                  Checkout
+                  {btn}
                </Link>
             </button>
          </div>
