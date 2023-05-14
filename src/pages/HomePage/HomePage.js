@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import * as data from "../../data";
-import { useCart, useCartActions } from "../../Providers/CartProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct } from "../../redux/products/cartActions";
 
 const HomePage = () => {
    const products = data.products;
 
-   const { cart } = useCart();
-   const dispatch = useCartActions();
+   const { cart } = useSelector((state) => state);
+   const dispatch = useDispatch();
 
    const checkInCart = (cart, product) => {
       return cart.find((item) => item.id === product.id);
@@ -46,9 +47,7 @@ const HomePage = () => {
                      {/* add to cart btn */}
                      <div className="btnContainer">
                         <button
-                           onClick={() =>
-                              dispatch({ type: "ADD_TO_CART", payload: p })
-                           }
+                           onClick={() => dispatch(addProduct(p))}
                            className={
                               checkInCart(cart, p) ? "btn btn-continue" : "btn"
                            }

@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom";
-import { useCart, useCartActions } from "../../Providers/CartProvider";
 import styles from "./CartPage.module.css";
 import { BiTrash } from "react-icons/bi";
 import { useAuth } from "../../Providers/AuthProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct, removeProduct } from "../../redux/products/cartActions";
 
 const CartPage = () => {
-   const { cart } = useCart();
-   const dispatch = useCartActions();
+   const { cart } = useSelector((state) => state);
+   const dispatch = useDispatch();
 
    const decHandler = (item) => {
-      dispatch({ type: "REMOVE_PRODUCT", payload: item });
+      dispatch(removeProduct(item));
    };
 
    const incHandler = (item) => {
-      dispatch({ type: "ADD_TO_CART", payload: item });
+      dispatch(addProduct(item));
    };
 
    const renderCart = () => {
@@ -108,7 +109,7 @@ export default CartPage;
 
 export const CartSummery = ({ title = "Cart Summery", btn = "Checkout" }) => {
    const userData = useAuth();
-   const { cart, total } = useCart();
+   const { cart, total } = useSelector((state) => state);
 
    const subtotal = cart.reduce(
       (acc, curr) => (acc += curr.price * curr.qty),
