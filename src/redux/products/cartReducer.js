@@ -1,8 +1,14 @@
+import { ADD_PRODUCT, REMOVE_PRODUCT } from "./cartTypes";
 import { toast } from "react-toastify";
 
-const cartReducer = (state, action) => {
+const initialState = {
+   cart: [],
+   total: 0,
+};
+
+const cartReducer = (state = initialState, action) => {
    switch (action.type) {
-      case "ADD_TO_CART": {
+      case ADD_PRODUCT: {
          const updatedCart = [...state.cart];
 
          const index = updatedCart.findIndex(
@@ -24,7 +30,7 @@ const cartReducer = (state, action) => {
          };
       }
 
-      case "REMOVE_PRODUCT": {
+      case REMOVE_PRODUCT: {
          const updatedCart = [...state.cart];
 
          const index = updatedCart.findIndex((p) => p.id === action.payload.id);

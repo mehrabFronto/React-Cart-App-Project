@@ -1,15 +1,15 @@
 import { Link, NavLink, withRouter } from "react-router-dom";
 import styles from "./Navigation.module.css";
-import { useCart } from "../../Providers/CartProvider";
 import { HiMenuAlt3, HiOutlineX } from "react-icons/hi";
 import { ImExit } from "react-icons/im";
 import { useState } from "react";
 import { useAuth, useAuthAction } from "../../Providers/AuthProvider";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const Navigation = ({ location, history }) => {
    const [isOpen, setIsOpen] = useState(false);
-   const { cart } = useCart();
+   const { cart } = useSelector((state) => state);
    const userData = useAuth();
    const setAuth = useAuthAction();
 

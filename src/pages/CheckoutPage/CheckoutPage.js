@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { useCart } from "../../Providers/CartProvider";
 import styles from "./checkoutPage.module.css";
 import { useAuth } from "../../Providers/AuthProvider";
 import { CartSummery } from "../CartPage/CartPage";
+import { useSelector } from "react-redux";
 
 const CheckoutPage = () => {
-   const { cart } = useCart();
+   const { cart } = useSelector((state) => state);
    const userData = useAuth();
 
    const renderCheckout = () => {
