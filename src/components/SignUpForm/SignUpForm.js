@@ -2,8 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../../common/Input/Input";
 import styles from "../../common/formStyles/form.module.css";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signUpUser } from "../../services/signUpService";
 import { toast } from "react-toastify";
 import { useAuthAction } from "../../Providers/AuthProvider";
@@ -34,7 +33,8 @@ const validationSchema = Yup.object({
       .required("confirm password is required"),
 });
 
-const SignUpForm = ({ history }) => {
+const SignUpForm = () => {
+   const navigate = useNavigate();
    const setAuth = useAuthAction();
    const query = useQuery();
    const redirect = query.get("redirect") || "/";
@@ -53,7 +53,7 @@ const SignUpForm = ({ history }) => {
          const { data } = await signUpUser(userData);
          setAuth(data);
          toast.success("Registration was successful");
-         history.push(redirect);
+         navigate(redirect);
       } catch (err) {
          if (err.response && err.response.data.message)
             toast.error(err.response.data.message);
@@ -138,4 +138,4 @@ const SignUpForm = ({ history }) => {
    );
 };
 
-export default withRouter(SignUpForm);
+export default SignUpForm;

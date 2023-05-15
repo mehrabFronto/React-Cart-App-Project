@@ -82,6 +82,10 @@
 }
 
 .activeClassName{
+    display: block;
+    border-radius: 6px;
+    padding: 0.3rem 1rem;
+    cursor: pointer;
     border: none;
     color: var(--secondary-color);
     background-color: var(--primary-color);
