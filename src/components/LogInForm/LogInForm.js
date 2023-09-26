@@ -24,7 +24,7 @@ const LogInForm = () => {
    const navigate = useNavigate();
    const setAuth = useAuthAction();
    const query = useQuery();
-   const redirect = query.get("redirect") ? `/${query.get("redirect")}` : "/";
+   const redirect = query.get("redirect") || "/";
 
    const onSubmit = async (values) => {
       try {
@@ -79,7 +79,7 @@ const LogInForm = () => {
                      Log In
                   </button>
                   <Link
-                     to={`sign-up?redirect=${redirect}`}
+                     to={`/sign-up?redirect=${redirect}`}
                      style={{
                         fontSize: "16px",
                         color: "var(--primary-color)",
