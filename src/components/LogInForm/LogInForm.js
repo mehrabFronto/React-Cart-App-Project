@@ -2,8 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../../common/Input/Input";
 import styles from "../../common/formStyles/form.module.css";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logInUser } from "../../services/logInService";
 import { toast } from "react-toastify";
 import { useAuthAction } from "../../Providers/AuthProvider";
@@ -21,7 +20,8 @@ const validationSchema = Yup.object({
    password: Yup.string().required("Password is required"),
 });
 
-const LogInForm = ({ history }) => {
+const LogInForm = () => {
+   const navigate = useNavigate();
    const setAuth = useAuthAction();
    const query = useQuery();
    const redirect = query.get("redirect") || "/";
@@ -30,8 +30,8 @@ const LogInForm = ({ history }) => {
       try {
          const { data } = await logInUser(values);
          setAuth(data);
-         toast.success("Login was successful");
-         history.push(redirect);
+         toast.success(`Welcome back dear ${data.name}`);
+         navigate(redirect);
       } catch (err) {
          if (err.response && err.response.data.message)
             toast.error(err.response.data.message);
@@ -79,7 +79,7 @@ const LogInForm = ({ history }) => {
                      Log In
                   </button>
                   <Link
-                     to={`sign-up?redirect=${redirect}`}
+                     to={`/sign-up?redirect=${redirect}`}
                      style={{
                         fontSize: "16px",
                         color: "var(--primary-color)",
@@ -93,4 +93,4 @@ const LogInForm = ({ history }) => {
    );
 };
 
-export default withRouter(LogInForm);
+export default LogInForm;

@@ -2,15 +2,10 @@ import { Link } from "react-router-dom";
 import { useAuth, useAuthAction } from "../../Providers/AuthProvider";
 import styles from "../../common/formStyles/form.module.css";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
 
-const ProfilePage = ({ history }) => {
+const ProfilePage = () => {
    const userData = useAuth();
    const setAuth = useAuthAction();
-
-   useEffect(() => {
-      !userData && history.push("/log-in");
-   }, []);
 
    const logOutHandler = () => {
       setAuth(false);

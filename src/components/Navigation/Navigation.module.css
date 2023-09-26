@@ -3,6 +3,7 @@
     height : auto;
     box-shadow: var(--box-shadow-color);
     position: fixed;
+    z-index: 100;
 }
 
 .nav{
@@ -82,12 +83,19 @@
 }
 
 .activeClassName{
+    display: block;
+    border-radius: 6px;
+    padding: 0.3rem 1rem;
+    cursor: pointer;
     border: none;
     color: var(--secondary-color);
     background-color: var(--primary-color);
 }
 
 .mobileActiveLink{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     background-color: var(--primary-color);
     color: var(--secondary-color);
     border-radius: 6px;

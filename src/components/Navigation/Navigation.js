@@ -1,15 +1,17 @@
-import { Link, NavLink, withRouter } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import styles from "./Navigation.module.css";
-import { useCart } from "../../Providers/CartProvider";
 import { HiMenuAlt3, HiOutlineX } from "react-icons/hi";
 import { ImExit } from "react-icons/im";
 import { useState } from "react";
 import { useAuth, useAuthAction } from "../../Providers/AuthProvider";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
-const Navigation = ({ location, history }) => {
+const Navigation = () => {
+   const location = useLocation();
+   const navigate = useNavigate();
    const [isOpen, setIsOpen] = useState(false);
-   const { cart } = useCart();
+   const { cart } = useSelector((state) => state);
    const userData = useAuth();
    const setAuth = useAuthAction();
 
@@ -17,7 +19,7 @@ const Navigation = ({ location, history }) => {
       setAuth(false);
       toast.success("you logged out");
       if (location.pathname === "/profile" || location.pathname === "/checkout")
-         history.push("/");
+         navigate("/");
    };
 
    return (
@@ -43,9 +45,12 @@ const Navigation = ({ location, history }) => {
                   <div className={styles.mobile_listItems}>
                      <li className={styles.mobileTab}>
                         <NavLink
-                           className={styles.mobileLink}
                            to="/cart"
-                           activeClassName={styles.mobileActiveLink}
+                           className={(navData) =>
+                              navData.isActive
+                                 ? styles.mobileActiveLink
+                                 : styles.mobileLink
+                           }
                            onClick={() => setIsOpen(false)}>
                            Cart
                            <span className={styles.qty}>{cart.length}</span>
@@ -53,9 +58,12 @@ const Navigation = ({ location, history }) => {
                      </li>
                      <li className={styles.mobileTab}>
                         <NavLink
-                           className={styles.mobileLink}
                            to={userData ? "/profile" : "/log-in"}
-                           activeClassName={styles.mobileActiveLink}
+                           className={(navData) =>
+                              navData.isActive
+                                 ? styles.mobileActiveLink
+                                 : styles.mobileLink
+                           }
                            onClick={() => setIsOpen(false)}>
                            {userData ? "Profile" : "Login/Signup"}
                         </NavLink>
@@ -65,8 +73,11 @@ const Navigation = ({ location, history }) => {
                <div className={styles.list_itemsWrapper}>
                   <li className={styles.cartTab}>
                      <NavLink
-                        className={styles.link}
-                        activeClassName={styles.activeClassName}
+                        className={(navData) =>
+                           navData.isActive
+                              ? styles.activeClassName
+                              : styles.link
+                        }
                         to="/cart">
                         Cart
                         <span className={styles.qty}>{cart.length}</span>
@@ -74,8 +85,11 @@ const Navigation = ({ location, history }) => {
                   </li>
                   <li>
                      <NavLink
-                        className={styles.link}
-                        activeClassName={styles.activeClassName}
+                        className={(navData) =>
+                           navData.isActive
+                              ? styles.activeClassName
+                              : styles.link
+                        }
                         to={userData ? "/profile" : "/log-in"}>
                         {userData ? "Profile" : "Login/Signup"}
                      </NavLink>
@@ -93,4 +107,4 @@ const Navigation = ({ location, history }) => {
    );
 };
 
-export default withRouter(Navigation);
+export default Navigation;
