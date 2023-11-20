@@ -1,19 +1,19 @@
-# Shopping App (with real api and back-end project)
+<h1 align="center" id="title">Cart App</h1>
 
-## using : redux , react-router-dom , http-requests(using axios) , context , formik yup and...
+<p id="description">A cart app using React, Redux, React-Router-Dom, Context, Formik-Yup, etc.</p>
 
-## features : Log-In , Sign-Up , checkout , cart actions (remove and add product) and ...
+  
+  
+<h2>Features</h2>
 
-## home page : 
-![homePage](https://github.com/mehrabFronto/Shopping-Project/assets/101546573/1e3e835b-d17d-487c-b390-02ef8a9d27b0)
+Here're some of the project's best features:
 
-## cart page : 
-![cartPage](https://github.com/mehrabFronto/Shopping-Project/assets/101546573/eed7fe79-8c37-4ddc-b61c-f6babb4afd50)
-
-## and many other pages
-
-### all styles are responsive for mobile , tablet , laptop and large screen laptop
-
-### at the first of the project, i used context+reducer to handle cart state and actions, but at the end i used redux instead of context+reducer
+*  Login and signup based on name, email, password, phone number
+*  Routing using RRD v6
+*  Add and remove products from cart 
+*  Checkout
+*  Responsive style for mobile, tablet, laptop and large laptop
 
 
+
+<p id="description">Because the back-end is local, login and signup does not work in online mode</p>
